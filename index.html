@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>CalcEasy</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link rel="shortcut icon" href="./icons/calculator_icon-icons.com_72046.ico" type="image/x-icon">
+</head>
+<body>
+  <nav class="navbar bg-body-secondary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <img src="./icons/calculator_icon-icons.com_72046.ico" alt="Logo" width="32" height="32" class="d-inline-block align-text-top">
+        <span class="fs-2 font-monospace fw-bold">CalcEasy</span>
+      </a>
+    </div>
+  </nav>
+  <div class="container-fluid mt-5">
+    <div class="row">
+      <div class="col-4 border border-black bg bg-secondary bg-gradient rounded p-2">
+        <div class="row mt-2 mb-2">
+          <div class="col">
+            <input type="text" class="form-control-lg w-100" id="screen" placeholder="Enter Expression..."/>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col">
+            <button type="button" value="7" class="btn btn-dark w-100 fs-4 val">7</button>
+          </div>
+          <div class="col">
+            <button type="button" value="8" class="btn btn-dark w-100 fs-4 val">8</button>
+          </div>
+          <div class="col">
+            <button type="button" value="9" class="btn btn-dark w-100 fs-4 val">9</button>
+          </div>
+          <div class="col">
+            <button type="button" value="/" class="btn btn-dark w-100 fs-4 val">/</button>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col">
+            <button type="button" value="4" class="btn btn-dark w-100 fs-4 val">4</button>
+          </div>
+          <div class="col">
+            <button type="button" value="5" class="btn btn-dark w-100 fs-4 val">5</button>
+          </div>
+          <div class="col">
+            <button type="button" value="6" class="btn btn-dark w-100 fs-4 val">6</button>
+          </div>
+          <div class="col">
+            <button type="button" value="*" class="btn btn-dark w-100 fs-4 val">*</button>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col">
+            <button type="button" value="1" class="btn btn-dark w-100 fs-4 val">1</button>
+          </div>
+          <div class="col">
+            <button type="button" value="2" class="btn btn-dark w-100 fs-4 val">2</button>
+          </div>
+          <div class="col">
+            <button type="button" value="3" class="btn btn-dark w-100 fs-4 val">3</button>
+          </div>
+          <div class="col">
+            <button type="button" value="+" class="btn btn-dark w-100 fs-4 val">+</button>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col">
+            <button type="button" value="0" class="btn btn-dark w-100 fs-4 val">0</button>
+          </div>
+          <div class="col">
+            <button type="button" value="." class="btn btn-dark w-100 fs-4 val">.</button>
+          </div>
+          <div class="col">
+            <button type="button" id="eval" class="btn btn-dark w-100 fs-4">=</button>
+          </div>
+          <div class="col">
+            <button type="button" value="-" class="btn btn-dark w-100 fs-4 val">-</button>
+          </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-3">
+              <button type="button" value="(" class="btn btn-dark w-100 fs-4 val">(</button>
+            </div>
+            <div class="col-3">
+              <button type="button" value=")" class="btn btn-dark w-100 fs-4 val">)</button>
+            </div>
+            <div class="col-6">
+              <button type="button" id="clear" class="btn btn-dark w-100 fs-4 val">Clear</button>
+            </div>    
+        </div>
+      </div>
+      <div class="col-8 bg bg-primary bg-gradient">
+        <div class="row fs-3 font-monospace text-white">
+            <div class="col">
+                CALCULATOR LOGS
+            </div>    
+        </div>
+        <div class="row fs-3 font-monospace text-white">
+            <div class="col">
+                <ul id="logs">
+
+                </ul>
+            </div>    
+        </div>
+      </div>
+    </div>  
+  </div>
+  <footer class="fixed-bottom bg-body-secondary fs-4 text-center">
+    <div class="container-fluid p-2">
+    Made Using 
+    <img src="./icons/file_type_html_icon_130541.ico" alt="Logo" width="30" height="26" class="d-inline-block align-text-top">&nbsp;HTML, 
+    <img src="./icons/bootstrap_plain_logo_icon_146619.ico" alt="Logo" width="30" height="26" class="d-inline-block align-text-top">&nbsp;Bootstrap, 
+    <img src="./icons/jquery_original_wordmark_logo_icon_146447.ico" alt="Logo" width="30" height="26" class="d-inline-block align-text-top">&nbsp;JQuery, 
+    <img src="./icons/javascript_icon_130900.ico" alt="Logo" width="30" height="26" class="d-inline-block align-text-top">&nbsp;JavaScript
+    </div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const screen=document.querySelector('#screen');
+    const logs=document.querySelector('#logs');
+
+    $('.val').on('click', function(e) {
+        let v=$(e.target).val();
+        screen.value=screen.value+v;
+    });
+
+    $('#eval').on('click', function(e) {
+        let value=eval(screen.value);
+        $(`<li>${screen.value}=${value}</li>`).appendTo('#logs');
+        screen.value=value;
+    })
+
+    $('#clear').on('click', (e)=>screen.value='')
+
+  </script>
+</body>
+
+</html>
