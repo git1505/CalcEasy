@@ -17,6 +17,9 @@
       </a>
     </div>
   </nav>
+  <div id="alert" class="alert alert-danger" role="alert">
+    A simple danger alert—check it out!
+  </div>
   <div class="container-fluid mt-5">
     <div class="row">
       <div class="col-4 border border-black bg bg-secondary bg-gradient rounded p-2">
@@ -121,21 +124,33 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    const screen=document.querySelector('#screen');
+    const screen=document.getElementById('screen');
     const logs=document.querySelector('#logs');
 
     $('.val').on('click', function(e) {
-        let v=$(e.target).val();
-        screen.value=screen.value+v;
-    });
+        e.preventDefault();
+        let v=$(this).val();
+        let sindex=screen.selectionStart;
+        screen.value=screen.value.substring(0, sindex)+v+screen.value.substring(sindex);
+        screen.setSelectionRange(sindex+1, sindex+1);
+        screen.focus();
+  });
 
     $('#eval').on('click', function(e) {
-        let value=eval(screen.value);
-        $(`<li>${screen.value}=${value}</li>`).appendTo('#logs');
-        screen.value=value;
+        e.preventDefault();
+        try {
+          let value=eval(screen.value);
+          $(`<li>${screen.value}=${value}</li>`).appendTo('#logs');
+          screen.value=value;
+        } catch {
+          $('#alert').show();
+        }
     })
 
-    $('#clear').on('click', (e)=>screen.value='')
+    $('#clear').on('click', (e)=>{
+      e.preventDefault();
+      screen.value='';
+    })
 
   </script>
 </body>
