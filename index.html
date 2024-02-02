@@ -17,11 +17,11 @@
       </a>
     </div>
   </nav>
-  <div id="alert" class="alert alert-danger" role="alert">
-    A simple danger alert—check it out!
+  <div id="alert" class="alert alert-danger alert-dismissible fade show" role="alert" hidden>
+    Invalid Mathematical Expression !
   </div>
-  <div class="container-fluid mt-5">
-    <div class="row">
+  <div class="container-fluid">
+    <div class="row mt-5">
       <div class="col-4 border border-black bg bg-secondary bg-gradient rounded p-2">
         <div class="row mt-2 mb-2">
           <div class="col">
@@ -143,7 +143,11 @@
           $(`<li>${screen.value}=${value}</li>`).appendTo('#logs');
           screen.value=value;
         } catch {
-          $('#alert').show();
+          $('#alert').attr('hidden', false);
+          setTimeout(() => { 
+            $('#alert').attr('hidden', true);
+            screen.value='';
+          }, 5000);
         }
     })
 
