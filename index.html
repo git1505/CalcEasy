@@ -17,7 +17,7 @@
       </a>
     </div>
   </nav>
-  <div id="alert" class="alert alert-danger alert-dismissible fade show" role="alert" hidden>
+  <div id="alert" class="alert alert-danger alert-dismissible fade" role="alert">
     Invalid Mathematical Expression !
   </div>
   <div class="container-fluid">
@@ -142,10 +142,12 @@
           let value=eval(screen.value);
           $(`<li>${screen.value}=${value}</li>`).appendTo('#logs');
           screen.value=value;
+          screen.setSelectionRange(screen.value.length, screen.value.length);
+          screen.focus();
         } catch {
-          $('#alert').attr('hidden', false);
-          setTimeout(() => { 
-            $('#alert').attr('hidden', true);
+          $('#alert').addClass('show');
+          setTimeout(() => {
+            $('#alert').removeClass('show');
             screen.value='';
           }, 5000);
         }
