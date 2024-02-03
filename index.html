@@ -140,6 +140,9 @@
         e.preventDefault();
         try {
           let value=eval(screen.value);
+          if(value.length === 0) {
+            throw new Error('value is invalid');
+          }
           $(`<li>${screen.value}=${value}</li>`).appendTo('#logs');
           screen.value=value;
           screen.setSelectionRange(screen.value.length, screen.value.length);
